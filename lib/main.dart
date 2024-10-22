@@ -38,14 +38,13 @@ class Home extends StatelessWidget {
               onPressed: () {
                 //showAboutDialog(context: context);
                 showModalBottomSheet(
-                  //barrierColor: Colors.tealAccent,
-                  backgroundColor: Colors.amberAccent[50],
+                    //barrierColor: Colors.tealAccent,
+                    backgroundColor: Colors.amberAccent[50],
                     isScrollControlled: true,
                     useSafeArea: true,
                     enableDrag: true,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)
-                    ),
+                        borderRadius: BorderRadius.circular(20)),
                     context: context,
                     builder: (ctx) {
                       return Column(
@@ -55,21 +54,26 @@ class Home extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Title', style: TextStyle(
-                                  fontSize: 20,
-                                ),),
+                                Text(
+                                  'Title',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                           Divider(
-                            height:20,
+                            height: 20,
                             thickness: 4,
                           ),
                           Text('sample'),
                           Row(
                             children: [
-                              ElevatedButton(onPressed: (){}, child: Text('Save')),
-                              ElevatedButton(onPressed: (){}, child: Text('Cancel'))
+                              ElevatedButton(
+                                  onPressed: () {}, child: Text('Save')),
+                              ElevatedButton(
+                                  onPressed: () {}, child: Text('Cancel'))
                             ],
                           )
                         ],
@@ -77,6 +81,42 @@ class Home extends StatelessWidget {
                     });
               },
               child: Text('Show dialog'),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextField(
+                maxLength: 50,
+                onChanged: (String? value) {
+                  print(value);
+                },
+                controller: TextEditingController(),
+                maxLines: 1,
+                keyboardType: TextInputType.phone,
+                enabled: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.green, width: 2)),
+                  disabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 4)
+                  ),
+                  hintText: 'Phone',
+                  hintStyle: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey.shade400,
+                  ),
+                  labelText: 'Phone Number',
+                  prefixIcon: Icon(Icons.phone),
+                  suffixIcon: Icon(Icons.person),
+                ),
+                //obscureText: true,
+              ),
             ),
           ],
         ),
