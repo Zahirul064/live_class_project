@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-// Gridview, ListTile, Form, GolablKey, Key hh
+// Gridview, ListTile, Form, GolablKey, Key
+
+// ListView.separated, Continuant
 
 void main() {
   runApp(HelloWorldApp());
@@ -23,27 +25,23 @@ class Home extends StatelessWidget {
   List<String> friendList = [
     'Zahirul Islam',
     'Tanvir Talha',
-    'Zarifa Fariha (Sara)',
-    'Zarifa Fariha (Sara)',
-    'Zarifa Fariha (Sara)',
-    'Zarifa Fariha (Sara)',
-    'Zarifa Fariha (Sara)',
-    'Zarifa Fariha (Sara)',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa',
-    'Zarifa'
+    'Sazzad',
+    'Habib',
+    'Ataur',
+    'Mizanur',
+    'Masum',
+    'Salim',
+    'Shamim',
+    'Shahen',
+    'Shehan',
+    'Rumman',
+    'Hamim',
+    'Rana',
+    'Tarique',
   ];
-  TextEditingController _emailTEController = TextEditingController();
+  /*TextEditingController _emailTEController = TextEditingController();
   TextEditingController _passwordTEController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey();
+  GlobalKey<FormState> _formKey = GlobalKey();*/
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,40 @@ class Home extends StatelessWidget {
         title: Text('ListTile Example'),
         backgroundColor: Colors.green,
       ),
+      body: ListView.separated(
 
+          itemCount: friendList.length,
+          itemBuilder: (BuildContext context, int index) {
+
+            return Column(
+              children: [
+
+                Text(friendList[index],
+                ),
+
+                // Divider(
+                //   height: 20,
+                //   thickness: 2,
+                //   color: Colors.grey,
+                //   indent: 16,
+                //   endIndent: 10,
+                // ),
+              ],
+
+            );
+          },
+
+        separatorBuilder: (context, index) {
+          return Divider(
+            color: Colors.red,
+            indent: 16,
+            endIndent: 10,
+            height: 5,
+          );
+        },
+      ),
+
+/*
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -97,7 +128,7 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ),*/
       /*body: GridView.builder(
         itemCount: friendList.length,
           gridDelegate:
