@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-// Gridview, ListTile, Form, GolablKey, Key
-
-// ListView.separated, Container
+// Naviagation
+// Route
+// Rout to Rout Navigation
+// Navigator
+// Stack
 
 void main() {
   runApp(HelloWorldApp());
@@ -20,6 +22,130 @@ class HelloWorldApp extends StatelessWidget {
 }
 
 class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Profile(userName: 'Zahirul',);
+                    },
+                  ),
+                );
+              },
+              child: Text('Go to Frofile'),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Setting();
+                      },
+                    ),
+                  );
+              },
+              child: Text('Go to Setting'),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class Profile extends StatelessWidget {
+  const Profile({super.key, required this.userName});
+
+  final String userName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(userName),
+            ElevatedButton(onPressed: () {
+              Navigator.pop(context);
+            }, child: Text('Back')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Setting(),
+                    ),
+                  );
+                },
+                child: Text('Go to Setting')),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                    (predicate) => false);
+              },
+              child: Text('Back to Home'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Setting extends StatelessWidget {
+  const Setting({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      appBar: AppBar(
+        title: Text('Setting'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Profile(userName: 'Tanvir',),
+                    ),
+                  );
+                },
+                child: Text('Go to Profile')),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*class Home extends StatelessWidget {
   Home({super.key});
 
   List<String> friendList = [
@@ -39,9 +165,9 @@ class Home extends StatelessWidget {
     'Rana',
     'Tarique',
   ];
-  /*TextEditingController _emailTEController = TextEditingController();
+  *//*TextEditingController _emailTEController = TextEditingController();
   TextEditingController _passwordTEController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey();*/
+  GlobalKey<FormState> _formKey = GlobalKey();*//*
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +177,7 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.green,
       ),
       // Container
-      body: Row(
+      *//*body: Row(
         children: [
           Container(
             width: 100,
@@ -84,8 +210,8 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-
-      /*body: ListView.separated(
+*//*
+      *//*body: ListView.separated(
 
           itemCount: friendList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -116,9 +242,9 @@ class Home extends StatelessWidget {
 
           );
         },
-      ),*/
+      ),*//*
 
-/*
+*//*
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -163,8 +289,8 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-      ),*/
-      /*body: GridView.builder(
+      ),*//*
+      *//*body: GridView.builder(
         itemCount: friendList.length,
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
@@ -175,9 +301,9 @@ class Home extends StatelessWidget {
 
           );
           }
-          ),*/
+          ),*//*
 
-      /*body: GridView(
+      *//*body: GridView(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, mainAxisSpacing: 10),
           children: [
@@ -186,8 +312,8 @@ class Home extends StatelessWidget {
             Text('data'),
             Text('data'),
           ],
-        )*/
-        /*body: ListView.builder(
+        )*//*
+        *//*body: ListView.builder(
           itemCount: friendList.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
@@ -206,15 +332,15 @@ class Home extends StatelessWidget {
               //dense: false,
             );
 
-            */ /*Padding(
+            *//* *//*Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 friendList[index],style: TextStyle(
                 fontSize: 16
               ),
               ),
-            );*/ /*
-          }),*/
+            );*//* *//*
+          }),*//*
         );
   }
-}
+}*/
