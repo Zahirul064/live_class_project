@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // Gridview, ListTile, Form, GolablKey, Key
 
-// ListView.separated, Continuant
+// ListView.separated, Container
 
 void main() {
   runApp(HelloWorldApp());
@@ -50,7 +50,42 @@ class Home extends StatelessWidget {
         title: Text('ListTile Example'),
         backgroundColor: Colors.green,
       ),
-      body: ListView.separated(
+      // Container
+      body: Row(
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(color: Colors.red, boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.pink.withOpacity(0.4),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 2),
+              )
+            ]),
+            margin: EdgeInsets.only(left: 24),
+            child: Text('Zahirul'),
+          ),
+          Container(
+            width: 100,
+            height: 100,
+            alignment: Alignment.center,
+            margin: EdgeInsets.all(16),
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              border: Border.all(color: Colors.black, width: 2),
+              shape: BoxShape.circle,
+              //borderRadius: BorderRadius.circular(26)
+            ),
+            child: Text('Random'),
+          ),
+        ],
+      ),
+
+      /*body: ListView.separated(
 
           itemCount: friendList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -81,7 +116,7 @@ class Home extends StatelessWidget {
 
           );
         },
-      ),
+      ),*/
 
 /*
       body: Padding(
