@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-// Naviagation
-// Route
-// Rout to Rout Navigation
-// Navigator
-// Stack
+// Theme
+// Code Smelll
+// Code Duplication
 
 void main() {
   runApp(HelloWorldApp());
@@ -17,6 +15,66 @@ class HelloWorldApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hello World App',
       home: Home(),
+      theme: ThemeData(
+        useMaterial3: true,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green[900],
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.green[800],
+          foregroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.pink),
+          ),
+        ),
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.green,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.grey[800],
+          foregroundColor: Colors.black,
+          titleTextStyle: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white38),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+        ),
+      ),
+      themeMode: ThemeMode.light,
     );
   }
 }
@@ -32,42 +90,58 @@ class Home extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          //crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  TextField(),
+                  SizedBox(height: 16),
+                  TextField(),
+                  SizedBox(height: 16),
+                  TextField(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Profile(
+                          userName: 'Zahirul',
+                        );
+                      },
+                    ),
+                  );
+                },
+                child: Text('Go to Frofile'),
+              ),
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return Profile(userName: 'Zahirul',);
+                      return Setting();
                     },
                   ),
                 );
               },
-              child: Text('Go to Frofile'),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Setting();
-                      },
-                    ),
-                  );
-              },
               child: Text('Go to Setting'),
             ),
-
           ],
         ),
       ),
     );
   }
 }
-
 
 class Profile extends StatelessWidget {
   const Profile({super.key, required this.userName});
@@ -79,15 +153,21 @@ class Profile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
+        backgroundColor: Colors.red[200],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(userName),
-            ElevatedButton(onPressed: () {
-              Navigator.pop(context);
-            }, child: Text('Back')),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(userName),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Back')),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(
@@ -119,7 +199,7 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Setting'),
       ),
@@ -127,13 +207,14 @@ class Setting extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Profile(userName: 'Tanvir',),
+                      builder: (context) => Profile(
+                        userName: 'Tanvir',
+                      ),
                     ),
                   );
                 },
@@ -165,9 +246,9 @@ class Setting extends StatelessWidget {
     'Rana',
     'Tarique',
   ];
-  *//*TextEditingController _emailTEController = TextEditingController();
+  */ /*TextEditingController _emailTEController = TextEditingController();
   TextEditingController _passwordTEController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey();*//*
+  GlobalKey<FormState> _formKey = GlobalKey();*/ /*
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +258,7 @@ class Setting extends StatelessWidget {
         backgroundColor: Colors.green,
       ),
       // Container
-      *//*body: Row(
+      */ /*body: Row(
         children: [
           Container(
             width: 100,
@@ -210,8 +291,8 @@ class Setting extends StatelessWidget {
           ),
         ],
       ),
-*//*
-      *//*body: ListView.separated(
+*/ /*
+      */ /*body: ListView.separated(
 
           itemCount: friendList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -242,9 +323,9 @@ class Setting extends StatelessWidget {
 
           );
         },
-      ),*//*
+      ),*/ /*
 
-*//*
+*/ /*
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -289,8 +370,8 @@ class Setting extends StatelessWidget {
             ],
           ),
         ),
-      ),*//*
-      *//*body: GridView.builder(
+      ),*/ /*
+      */ /*body: GridView.builder(
         itemCount: friendList.length,
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
@@ -301,9 +382,9 @@ class Setting extends StatelessWidget {
 
           );
           }
-          ),*//*
+          ),*/ /*
 
-      *//*body: GridView(
+      */ /*body: GridView(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, mainAxisSpacing: 10),
           children: [
@@ -312,8 +393,8 @@ class Setting extends StatelessWidget {
             Text('data'),
             Text('data'),
           ],
-        )*//*
-        *//*body: ListView.builder(
+        )*/ /*
+        */ /*body: ListView.builder(
           itemCount: friendList.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
@@ -332,15 +413,15 @@ class Setting extends StatelessWidget {
               //dense: false,
             );
 
-            *//* *//*Padding(
+            */ /* */ /*Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 friendList[index],style: TextStyle(
                 fontSize: 16
               ),
               ),
-            );*//* *//*
-          }),*//*
+            );*/ /* */ /*
+          }),*/ /*
         );
   }
 }*/
