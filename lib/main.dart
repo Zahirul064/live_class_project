@@ -219,6 +219,29 @@ class Setting extends StatelessWidget {
                   );
                 },
                 child: Text('Go to Profile')),
+            SizedBox(
+              height: 16,
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  color: Colors.green,
+                ),
+                Container(
+                  width: 80,
+                  height: 80,
+                  color: Colors.pink,
+                ),
+                Container(
+                  width: 60,
+                  height: 60,
+                  color: Colors.white,
+                ),
+              ],
+            ),
           ],
         ),
       ),
