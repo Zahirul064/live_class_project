@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 
-// Theme
-// Code Smelll
-// Code Duplication
+// CupertinoButton , CupertinoSwitch
 
 void main() {
   runApp(CupertinoExpApp());
