@@ -1,103 +1,112 @@
-// Named Navigation, Stateful Widget
-
 import 'package:flutter/material.dart';
 
-void main(){
-  runApp(SimpleApp());
+void main() {
+  runApp(MyApp());
 }
 
-class SimpleApp extends StatelessWidget {
-  const SimpleApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/home',
-      routes: {
-        '/home': (context) => Home(),
-        '/profile': (context) => Profile(),
-        '/setting': (context) => Setting(),
-      },
+      home: ProfileScreen(),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.yellow[700],
+          foregroundColor: Colors.yellow,
+          titleTextStyle: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87),
+          actionsIconTheme: IconThemeData(color: Colors.black87),
+        ),
+      ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class ProfileItem extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  ProfileItem({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 60,
+          backgroundColor: Colors.purple[100],
+          child: Icon(
+            icon,
+            size: 60,
+            color: Colors.purple[900],
+          ),
+        ),
+        SizedBox(height: 10),
+        Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('My Profile'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.phone),
+            onPressed: () {},
+          ),
+        ],
       ),
-      body: Center(
-        child: SizedBox(
+      body: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Profile(),
-                  //   ),
-                  // );
-                  Navigator.pushNamed(context, '/profile');
-                },
-                child: Text('Go to Profile'),
+              SizedBox(height: 16),
+              ProfileItem(
+                icon: Icons.icecream,
+                text: 'Ice cream is very delicious right?',
+              ),
+              SizedBox(height: 20),
+              ProfileItem(
+                icon: Icons.code,
+                text: 'Programming is not boring if you love it',
+              ),
+              SizedBox(height: 20),
+              ProfileItem(
+                icon: Icons.egg,
+                text:
+                    'If you submit code directly copy from chatgpt then mark will 0',
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      body: Column(
-        children: [
-          ElevatedButton(onPressed: (){
-            // Navigator.pushReplacement(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => Setting(),
-            //   ),
-            // );
-            Navigator.pushReplacementNamed(context, '/setting');
-          }, child: Text('Go to Setting'))
-        ],
-      ),
-    );
-  }
-}
-
-
-class Setting extends StatelessWidget {
-   Setting ({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Setting'),
-      ),
-      body: Column(
-        children: [
-          ElevatedButton(onPressed: (){
-            //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>Home()), (predicate) => false);
-          Navigator.pushNamedAndRemoveUntil(context, '/home', (predicate) => false);
-          }, child: Text('Home'))
-        ],
       ),
     );
   }
