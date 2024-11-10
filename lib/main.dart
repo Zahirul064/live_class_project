@@ -53,7 +53,6 @@ class ProfileItem extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-
       ],
     );
   }
