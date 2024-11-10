@@ -1,56 +1,103 @@
-import 'package:flutter/cupertino.dart';
+// Named Navigation, Stateful Widget
 
+import 'package:flutter/material.dart';
 
-// CupertinoButton , CupertinoSwitch
-
-void main() {
-  runApp(CupertinoExpApp());
+void main(){
+  runApp(SimpleApp());
 }
 
-class CupertinoExpApp extends StatelessWidget {
-  const CupertinoExpApp({super.key});
+class SimpleApp extends StatelessWidget {
+  const SimpleApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      title: 'Experiment Project',
-      home: Home(),
+    return MaterialApp(
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => Home(),
+        '/profile': (context) => Profile(),
+        '/setting': (context) => Setting(),
+      },
     );
   }
 }
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('Home'),
-        trailing: Icon(CupertinoIcons.alarm),
-        leading: Icon(CupertinoIcons.delete),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Center(
+        child: SizedBox(
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => Profile(),
+                  //   ),
+                  // );
+                  Navigator.pushNamed(context, '/profile');
+                },
+                child: Text('Go to Profile'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Profile extends StatelessWidget {
+  const Profile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: Column(
         children: [
-
-          CupertinoButton.filled(child: Text('Tap Here'), onPressed: (){}),
-          CupertinoButton(child: Text('Tap Here'), onPressed: (){}),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: CupertinoListTile(
-              title: Text('Title'),
-              onTap: (){},
-              backgroundColor: CupertinoColors.inactiveGray,
-              subtitle: Text('Subtitle'),
-              trailing: Icon(CupertinoIcons.airplane),
-
-            ),
-          ),
-          CupertinoSwitch(value: true, onChanged: (value){}
-
-          ),
+          ElevatedButton(onPressed: (){
+            // Navigator.pushReplacement(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => Setting(),
+            //   ),
+            // );
+            Navigator.pushReplacementNamed(context, '/setting');
+          }, child: Text('Go to Setting'))
         ],
+      ),
+    );
+  }
+}
 
+
+class Setting extends StatelessWidget {
+   Setting ({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Setting'),
+      ),
+      body: Column(
+        children: [
+          ElevatedButton(onPressed: (){
+            //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>Home()), (predicate) => false);
+          Navigator.pushNamedAndRemoveUntil(context, '/home', (predicate) => false);
+          }, child: Text('Home'))
+        ],
       ),
     );
   }
