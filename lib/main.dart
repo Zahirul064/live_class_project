@@ -1,9 +1,9 @@
-// Named Navigation, Stateful Widget
+//  Stateful Widget
 
 import 'package:flutter/material.dart';
 
-void main(){
-  runApp(SimpleApp());
+void main() {
+  runApp(const SimpleApp());
 }
 
 class SimpleApp extends StatelessWidget {
@@ -11,93 +11,37 @@ class SimpleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/home',
-      routes: {
-        '/home': (context) => Home(),
-        '/profile': (context) => Profile(),
-        '/setting': (context) => Setting(),
-      },
+    return const MaterialApp(
+      home: CounterScreen(),
     );
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class CounterScreen extends StatefulWidget {
+  const CounterScreen({super.key});
+
+  @override
+  State<CounterScreen> createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Counter'),
       ),
       body: Center(
-        child: SizedBox(
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => Profile(),
-                  //   ),
-                  // );
-                  Navigator.pushNamed(context, '/profile');
-                },
-                child: Text('Go to Profile'),
-              ),
-            ],
-          ),
-        ),
+        child: Text('Count value is: $counter'),
       ),
-    );
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      body: Column(
-        children: [
-          ElevatedButton(onPressed: (){
-            // Navigator.pushReplacement(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => Setting(),
-            //   ),
-            // );
-            Navigator.pushReplacementNamed(context, '/setting');
-          }, child: Text('Go to Setting'))
-        ],
-      ),
-    );
-  }
-}
-
-
-class Setting extends StatelessWidget {
-   Setting ({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Setting'),
-      ),
-      body: Column(
-        children: [
-          ElevatedButton(onPressed: (){
-            //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>Home()), (predicate) => false);
-          Navigator.pushNamedAndRemoveUntil(context, '/home', (predicate) => false);
-          }, child: Text('Home'))
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          counter = counter + 1;
+          setState(() {});
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
