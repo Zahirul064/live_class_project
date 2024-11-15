@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ProfileItem(
-                icon: Icons.bloodtype,
+                icon: Icons.bloodtype_outlined,
                 text: 'Donate Blood',
               ),
             ],
