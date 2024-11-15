@@ -10,17 +10,50 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ProfileScreen(),
+      home: HomeScreen(),
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.yellow[700],
-          foregroundColor: Colors.yellow,
-          titleTextStyle: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87),
-          actionsIconTheme: IconThemeData(color: Colors.black87),
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.red,
+          titleTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+          actionsIconTheme: IconThemeData(color: Colors.white),
         ),
       ),
       debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Text('Need Blood'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ProfileItem(
+                icon: Icons.bloodtype,
+                text: 'Donate Blood',
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -37,77 +70,23 @@ class ProfileItem extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 60,
-          backgroundColor: Colors.purple[100],
+          backgroundColor: Colors.grey[700],
           child: Icon(
             icon,
-            size: 60,
-            color: Colors.purple[900],
+            size: 50,
+            color: Colors.red,
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 16),
         Text(
           text,
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
       ],
-    );
-  }
-}
-
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Profile'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.phone),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 16),
-              ProfileItem(
-                icon: Icons.icecream,
-                text: 'Ice cream is very delicious right?',
-              ),
-              SizedBox(height: 20),
-              ProfileItem(
-                icon: Icons.code,
-                text: 'Programming is not boring if you love it',
-              ),
-              SizedBox(height: 20),
-              ProfileItem(
-                icon: Icons.egg,
-                text:
-                    'If you submit code directly copy from chatgpt then mark will 0',
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
