@@ -29,51 +29,103 @@ class CRUDApp extends StatelessWidget {
           },
         );
       },
-      theme: ThemeData(
-          colorSchemeSeed: Colors.blue,
-          appBarTheme: const AppBarTheme(
-            centerTitle: true,
-            backgroundColor: Colors.blue,
-            iconTheme: IconThemeData(
-                color: Colors.white
-            ),
-            titleTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600
-            ),
+      title: 'Crud App',
+      home: const ProductListScreen(),
+      theme: buildThemeData(),
+      darkTheme: _darkThemeData(),
+      themeMode: ThemeMode.system, // Adjust to ThemeMode.dark for testing
+    );
+  }
+
+  ThemeData buildThemeData() {
+    return ThemeData(
+      colorSchemeSeed: Colors.blue,
+      brightness: Brightness.light,
+      appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+        iconTheme: IconThemeData(color: Colors.white),
+        titleTextStyle: TextStyle(
+            color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.brown),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.brown),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.brown),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.amber,
+          foregroundColor: Colors.white,
+          textStyle:
+          const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        ),
+      ),
+    );
+  }
+
+  ThemeData _darkThemeData() {
+    return ThemeData(
+      brightness: Brightness.dark,
+      colorScheme: ColorScheme.dark(
+        primary: Colors.purple,
+        secondary: Colors.deepOrange,
+        surface: Colors.grey[850]!,
+        error: Colors.red,
+        onPrimary: Colors.white,
+        onSecondary: Colors.black,
+        onSurface: Colors.white,
+        onError: Colors.white,
+      ),
+      appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        backgroundColor: Colors.purple,
+        iconTheme: IconThemeData(color: Colors.white),
+        titleTextStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        enabledBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+        focusedBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
+        errorBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+      ),
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: Colors.white),
+        bodyMedium: TextStyle(color: Colors.white70),
+        titleLarge: TextStyle(
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
           ),
-          inputDecorationTheme: const InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.brown),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.brown),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.brown),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-            ),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.amber,
-              foregroundColor: Colors.white,
-              textStyle: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)
-              ),
-            ),
-          )
+          backgroundColor: Colors.purple,
+          foregroundColor: Colors.white,
+        ),
       ),
     );
   }
