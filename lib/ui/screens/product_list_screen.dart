@@ -103,8 +103,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Are you sure? Will you delete this product?'),
-          backgroundColor: Colors.white,
+          title: const Text('Are you sure you want to delete?'),
+
           content: Container(
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
@@ -132,7 +132,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       Text('Total Price:  ${product.totalPrice ?? ''}'),
                     ],
                   ),
-                  tileColor: Colors.white,
+
                 ),
               ],
             ),

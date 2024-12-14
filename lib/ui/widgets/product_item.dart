@@ -33,7 +33,9 @@ class ProductItem extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: onDeleteTab, // TODO: implement delete product api
-                icon: const Icon(Icons.delete)),
+                icon: const Icon(Icons.delete_outline),
+              color: Colors.red,
+            ),
             IconButton(
               onPressed: () {
                 Navigator.pushNamed(
@@ -42,7 +44,7 @@ class ProductItem extends StatelessWidget {
                   arguments: product,
                 );
               },
-              icon: const Icon(Icons.edit),
+              icon: const Icon(Icons.edit_outlined),
             ),
           ],
         ),

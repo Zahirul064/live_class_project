@@ -27,10 +27,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+
       appBar: AppBar(
         title: const Text('Add Product'),
-        backgroundColor: Colors.white,
+
       ),
       body: SingleChildScrollView(
         child: Padding(

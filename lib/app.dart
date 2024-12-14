@@ -91,31 +91,38 @@ class CRUDApp extends StatelessWidget {
         onSurface: Colors.white,
         onError: Colors.white,
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         centerTitle: true,
         backgroundColor: Colors.purple,
-        iconTheme: IconThemeData(color: Colors.white),
-        titleTextStyle: TextStyle(
+        iconTheme: const IconThemeData(color: Colors.white),
+        titleTextStyle: const TextStyle(
           color: Colors.white,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
       ),
-      inputDecorationTheme: const InputDecorationTheme(
-        enabledBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
-        focusedBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
-        errorBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-        focusedErrorBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+      inputDecorationTheme: InputDecorationTheme(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.purple),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.deepOrange),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+        ),
       ),
       textTheme: const TextTheme(
         bodyLarge: TextStyle(color: Colors.white),
         bodyMedium: TextStyle(color: Colors.white70),
         titleLarge: TextStyle(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
