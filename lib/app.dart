@@ -82,7 +82,7 @@ class CRUDApp extends StatelessWidget {
     return ThemeData(
       brightness: Brightness.dark,
       colorScheme: ColorScheme.dark(
-        primary: Colors.purple,
+        primary: Colors.black54,
         secondary: Colors.deepOrange,
         surface: Colors.grey[850]!,
         error: Colors.red,
@@ -93,7 +93,7 @@ class CRUDApp extends StatelessWidget {
       ),
       appBarTheme: AppBarTheme(
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.black54,
         iconTheme: const IconThemeData(color: Colors.white),
         titleTextStyle: const TextStyle(
           color: Colors.white,
@@ -103,7 +103,7 @@ class CRUDApp extends StatelessWidget {
       ),
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.purple),
+          borderSide: BorderSide(color: Colors.black54),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.deepOrange),
@@ -130,7 +130,7 @@ class CRUDApp extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          backgroundColor: Colors.purple,
+          backgroundColor: Colors.black54,
           foregroundColor: Colors.white,
         ),
       ),
