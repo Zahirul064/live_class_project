@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/sign_in_screen.dart';
+import 'package:task_manager/ui/widgets/app_logo.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
-
-
-
-
-import '../widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,10 +13,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     moveToNextScreen();
   }

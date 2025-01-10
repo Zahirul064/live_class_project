@@ -1,31 +1,28 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager/ui/screens/forget_password_verify_otp_screen.dart';
+import 'package:task_manager/ui/screens/forgot_password_verify_otp_screen.dart';
+import 'package:task_manager/ui/utils/app_colors.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
+class ForgotPasswordVerifyEmailScreen extends StatefulWidget {
+  const ForgotPasswordVerifyEmailScreen({super.key});
 
-import '../utils/app_colors.dart';
-
-class ForgetPasswordVerifyEmailScreen extends StatefulWidget {
-  const ForgetPasswordVerifyEmailScreen({super.key});
-
-  static const String name = '/forget-password/verify-email';
+  static const String name = '/forgot-password/verify-email';
 
   @override
-  State<ForgetPasswordVerifyEmailScreen> createState() =>
-      _ForgetPasswordVerifyEmailScreenState();
+  State<ForgotPasswordVerifyEmailScreen> createState() =>
+      _ForgotPasswordVerifyEmailScreenState();
 }
 
-class _ForgetPasswordVerifyEmailScreenState
-    extends State<ForgetPasswordVerifyEmailScreen> {
-  final TextEditingController _emailTextEditingController =
-      TextEditingController();
-
+class _ForgotPasswordVerifyEmailScreenState
+    extends State<ForgotPasswordVerifyEmailScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: ScreenBackground(
         child: SingleChildScrollView(
@@ -36,32 +33,31 @@ class _ForgetPasswordVerifyEmailScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 80,
-                  ),
+                  const SizedBox(height: 80),
                   Text('Your Email Address', style: textTheme.titleLarge),
                   const SizedBox(height: 4),
-                  Text('A 6 digit of OTP will be send to your email address',
-                      style: textTheme.titleSmall),
+                  Text(
+                    'A 6 digits of OTP will be sent to your email address',
+                    style: textTheme.titleSmall,
+                  ),
                   const SizedBox(height: 24),
                   TextFormField(
-                    controller: _emailTextEditingController,
+                    controller: _emailTEController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      hintText: 'Email',
-                    ),
+                    decoration: const InputDecoration(hintText: 'Email'),
                   ),
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, ForgotPasswordVerifyOtpScreen.name);
+                      Navigator.pushNamed(
+                          context, ForgotPasswordVerifyOtpScreen.name);
                     },
                     child: const Icon(Icons.arrow_circle_right_outlined),
                   ),
                   const SizedBox(height: 48),
                   Center(
-                    child: _buildSingInSection(),
-                  ),
+                    child: _buildSignInSection(),
+                  )
                 ],
               ),
             ),
@@ -71,10 +67,10 @@ class _ForgetPasswordVerifyEmailScreenState
     );
   }
 
-  Widget _buildSingInSection() {
+  Widget _buildSignInSection() {
     return RichText(
       text: TextSpan(
-        text: "Have account? ",
+        text: "Have an account? ",
         style:
             const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
         children: [
@@ -87,7 +83,7 @@ class _ForgetPasswordVerifyEmailScreenState
               ..onTap = () {
                 Navigator.pop(context);
               },
-          ),
+          )
         ],
       ),
     );
@@ -95,7 +91,7 @@ class _ForgetPasswordVerifyEmailScreenState
 
   @override
   void dispose() {
-    _emailTextEditingController.dispose();
+    _emailTEController.dispose();
     super.dispose();
   }
 }

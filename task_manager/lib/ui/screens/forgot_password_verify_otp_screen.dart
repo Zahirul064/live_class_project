@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:task_manager/ui/screens/reset_password_screen.dart';
 import 'package:task_manager/ui/screens/sign_in_screen.dart';
+import 'package:task_manager/ui/utils/app_colors.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
-
-
-import '../utils/app_colors.dart';
 
 class ForgotPasswordVerifyOtpScreen extends StatefulWidget {
   const ForgotPasswordVerifyOtpScreen({super.key});
@@ -93,7 +91,7 @@ class _ForgotPasswordVerifyOtpScreenState
       text: TextSpan(
         text: "Have an account? ",
         style:
-        const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
+            const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
         children: [
           TextSpan(
             text: 'Sign in',

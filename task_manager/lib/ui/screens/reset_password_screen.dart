@@ -1,9 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/sign_in_screen.dart';
+import 'package:task_manager/ui/utils/app_colors.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
-
-import '../utils/app_colors.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -16,9 +15,9 @@ class ResetPasswordScreen extends StatefulWidget {
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _newPasswordTEController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _confirmPasswordTEController =
-  TextEditingController();
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -51,7 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   TextFormField(
                     controller: _confirmPasswordTEController,
                     decoration:
-                    const InputDecoration(hintText: 'Confirm New Password'),
+                        const InputDecoration(hintText: 'Confirm New Password'),
                   ),
                   const SizedBox(height: 24),
                   ElevatedButton(
@@ -76,7 +75,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       text: TextSpan(
         text: "Have an account? ",
         style:
-        const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
+            const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
         children: [
           TextSpan(
             text: 'Sign in',
