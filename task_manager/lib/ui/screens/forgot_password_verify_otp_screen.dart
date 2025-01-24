@@ -135,7 +135,7 @@ class _ForgotPasswordVerifyOtpScreenState
   }
 
   Future<bool> _verifyOTP() async {
-    bool _isSuccess = false;
+    bool isSuccess = false;
     _verifyOTPStatus = true;
     setState(() {});
     final NetworkResponse response = await NetworkCaller.getRequest(
@@ -146,7 +146,7 @@ class _ForgotPasswordVerifyOtpScreenState
         response.status.toLowerCase().contains('success')) {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, 'OTP verified');
-      _isSuccess = true;
+      isSuccess = true;
     } else if (response.isSuccess) {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, 'Invalid OTP code');
@@ -156,6 +156,6 @@ class _ForgotPasswordVerifyOtpScreenState
     }
     _verifyOTPStatus = false;
     setState(() {});
-    return _isSuccess;
+    return isSuccess;
   }
 }

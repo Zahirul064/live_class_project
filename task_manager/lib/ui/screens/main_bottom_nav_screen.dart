@@ -39,7 +39,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
           NavigationDestination(icon: const Icon(Icons.refresh), label: enumTaskStatus.Progress.name),
           NavigationDestination(icon: const Icon(Icons.done), label:enumTaskStatus.Completed.name),
           NavigationDestination(
-              icon: Icon(Icons.cancel_outlined), label: enumTaskStatus.Canceled.name),
+              icon: const Icon(Icons.cancel_outlined), label: enumTaskStatus.Canceled.name),
         ],
       ),
     );

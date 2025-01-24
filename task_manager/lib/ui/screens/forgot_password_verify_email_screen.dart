@@ -111,7 +111,7 @@ class _ForgotPasswordVerifyEmailScreenState
   }
 
   Future<bool> _verifyEmail() async {
-    bool _isSuccess = false;
+    bool isSuccess = false;
     _verifyEmailStatus = true;
     setState(() {});
     final NetworkResponse response = await NetworkCaller.getRequest(
@@ -121,13 +121,13 @@ class _ForgotPasswordVerifyEmailScreenState
         response.status.toLowerCase().contains('success')) {
       showSnackBarMessage(TaskManagerApp.navigatorKey.currentContext!,
           'OTP is sent to your email, Please check.');
-      _isSuccess = true;
+      isSuccess = true;
     } else {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, response.errorMessage);
     }
     _verifyEmailStatus = false;
     setState(() {});
-    return _isSuccess;
+    return isSuccess;
   }
 }

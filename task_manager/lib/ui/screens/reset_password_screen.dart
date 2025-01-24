@@ -127,7 +127,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   Future<bool> _resetPassword() async {
-    bool _isSuccess = false;
+    bool isSuccess = false;
     _progressStatus = true;
     setState(() {});
     Map<String, dynamic> requestBody = {
@@ -141,14 +141,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     setState(() {});
     if (response.isSuccess &&
         response.status.toLowerCase().contains('success')) {
-      _isSuccess = true;
+      isSuccess = true;
       showSnackBarMessage(TaskManagerApp.navigatorKey.currentContext!,
           'Password changed successfully.');
     } else {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, response.errorMessage);
     }
-    return _isSuccess;
+    return isSuccess;
   }
 
   @override
