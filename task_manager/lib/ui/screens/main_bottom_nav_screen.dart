@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/ui/screens/canceled_task_list_screen.dart';
+import 'package:task_manager/ui/screens/completed_task_list_screen.dart';
 import 'package:task_manager/ui/screens/new_task_list_screen.dart';
 import 'package:task_manager/ui/screens/progress_task_list_screen.dart';
+import 'package:task_manager/ui/utils/status_enum.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
   const MainBottomNavScreen({super.key});
@@ -16,8 +19,8 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final List<Widget> _screens = const [
     NewTaskListScreen(),
     ProgressTaskListScreen(),
-    NewTaskListScreen(),
-    NewTaskListScreen(),
+    CompletedTaskListScreen(),
+    CanceledTaskListScreen()
   ];
 
   @override
@@ -30,13 +33,13 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
           _selectedIndex = index;
           setState(() {});
         },
-        destinations: const [
+        destinations: [
           NavigationDestination(
-              icon: Icon(Icons.new_label_outlined), label: 'New'),
-          NavigationDestination(icon: Icon(Icons.refresh), label: 'Progress'),
-          NavigationDestination(icon: Icon(Icons.done), label: 'Completed'),
+              icon: const Icon(Icons.new_label_outlined), label: enumTaskStatus.NewTask.name),
+          NavigationDestination(icon: const Icon(Icons.refresh), label: enumTaskStatus.Progress.name),
+          NavigationDestination(icon: const Icon(Icons.done), label:enumTaskStatus.Completed.name),
           NavigationDestination(
-              icon: Icon(Icons.cancel_outlined), label: 'Cancelled'),
+              icon: Icon(Icons.cancel_outlined), label: enumTaskStatus.Canceled.name),
         ],
       ),
     );

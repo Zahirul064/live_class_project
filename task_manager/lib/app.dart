@@ -13,10 +13,15 @@ import 'package:task_manager/ui/utils/app_colors.dart';
 class TaskManagerApp extends StatelessWidget {
   const TaskManagerApp({super.key});
 
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: '/',
+      navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorSchemeSeed: AppColors.themeColor,
         textTheme: const TextTheme(
@@ -42,7 +47,7 @@ class TaskManagerApp extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.themeColor,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             fixedSize: const Size.fromWidth(double.maxFinite),
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -74,6 +79,7 @@ class TaskManagerApp extends StatelessWidget {
         } else if (settings.name == UpdateProfileScreen.name) {
           widget = const UpdateProfileScreen();
         }
+
         return MaterialPageRoute(builder: (ctx) => widget);
       },
     );

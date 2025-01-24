@@ -11,17 +11,19 @@ import 'package:task_manager/ui/widgets/snack_bar_message.dart';
 import 'package:task_manager/ui/widgets/task_item_widget.dart';
 import 'package:task_manager/ui/widgets/tm_app_bar.dart';
 
-class ProgressTaskListScreen extends StatefulWidget {
-  const ProgressTaskListScreen({super.key});
+class CanceledTaskListScreen extends StatefulWidget {
+  const CanceledTaskListScreen({super.key});
+
 
   @override
-  State<ProgressTaskListScreen> createState() => _ProgressTaskListScreenState();
+  State<CanceledTaskListScreen> createState() => _CanceledTaskListScreenState();
 }
 
-class _ProgressTaskListScreenState extends State<ProgressTaskListScreen> {
+class _CanceledTaskListScreenState extends State<CanceledTaskListScreen> {
   bool _getNewTaskListInProgress = false;
   TaskCountByStatusModel? taskCountByStatusModel;
   TaskListByStatusModel? newTaskListModel;
+  
 
   @override
   void initState() {
@@ -65,11 +67,10 @@ class _ProgressTaskListScreenState extends State<ProgressTaskListScreen> {
     );
   }
 
-
   Future<void> _getNewTaskList() async {
     _getNewTaskListInProgress = true;
     setState(() {});
-    final NetworkResponse response =await NetworkCaller.getRequest(url: Urls.taskListByStatusUrl(enumTaskStatus.Progress.name));
+    final NetworkResponse response =await NetworkCaller.getRequest(url: Urls.taskListByStatusUrl(enumTaskStatus.Canceled.name));
     if (response.isSuccess) {
       newTaskListModel = TaskListByStatusModel.fromJson(response.responseData!);
     } else {

@@ -11,14 +11,14 @@ import 'package:task_manager/ui/widgets/snack_bar_message.dart';
 import 'package:task_manager/ui/widgets/task_item_widget.dart';
 import 'package:task_manager/ui/widgets/tm_app_bar.dart';
 
-class ProgressTaskListScreen extends StatefulWidget {
-  const ProgressTaskListScreen({super.key});
+class CompletedTaskListScreen extends StatefulWidget {
+  const CompletedTaskListScreen({super.key});
 
   @override
-  State<ProgressTaskListScreen> createState() => _ProgressTaskListScreenState();
+  State<CompletedTaskListScreen> createState() => _CompletedTaskListScreenState();
 }
 
-class _ProgressTaskListScreenState extends State<ProgressTaskListScreen> {
+class _CompletedTaskListScreenState extends State<CompletedTaskListScreen> {
   bool _getNewTaskListInProgress = false;
   TaskCountByStatusModel? taskCountByStatusModel;
   TaskListByStatusModel? newTaskListModel;
@@ -69,7 +69,7 @@ class _ProgressTaskListScreenState extends State<ProgressTaskListScreen> {
   Future<void> _getNewTaskList() async {
     _getNewTaskListInProgress = true;
     setState(() {});
-    final NetworkResponse response =await NetworkCaller.getRequest(url: Urls.taskListByStatusUrl(enumTaskStatus.Progress.name));
+    final NetworkResponse response =await NetworkCaller.getRequest(url: Urls.taskListByStatusUrl(enumTaskStatus.Completed.name));
     if (response.isSuccess) {
       newTaskListModel = TaskListByStatusModel.fromJson(response.responseData!);
     } else {
