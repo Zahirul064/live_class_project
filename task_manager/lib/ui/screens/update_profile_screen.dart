@@ -1,10 +1,14 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:task_manager/data/services/network_caller.dart';
 import 'package:task_manager/data/utils/urls.dart';
 import 'package:task_manager/ui/controllers/auth_controller.dart';
+import 'package:task_manager/ui/screens/main_bottom_nav_screen.dart';
 import 'package:task_manager/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 import 'package:task_manager/ui/widgets/snack_bar_message.dart';
@@ -187,7 +191,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
     if (_pickedImage != null) {
       List<int> imageBytes = await _pickedImage!.readAsBytes();
-      requestBody['photo'] = base64Encode(imageBytes);
+      Uint8List imageBytesConverted = Uint8List.fromList(imageBytes);
+      // Resize the image
+      var result = await FlutterImageCompress.compressWithList(
+        imageBytesConverted,
+        minWidth: 100, // Minimum width
+        minHeight: 100, // Minimum height
+        quality: 50, // Compression quality (0-100)
+      );
+      requestBody['photo'] = base64Encode(result);
     }
     if (_passwordTEController.text.isNotEmpty) {
       requestBody['password'] = _passwordTEController.text;
@@ -199,6 +211,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     setState(() {});
     if (response.isSuccess) {
       _passwordTEController.clear();
+      AuthController.userModel!.photo = requestBody['photo'];
+      Navigator.pushReplacementNamed(context, MainBottomNavScreen.name);
     } else {
       showSnackBarMessage(context, response.errorMessage);
     }

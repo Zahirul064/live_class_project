@@ -110,7 +110,7 @@ class _ForgotPasswordVerifyOtpScreenState
       text: TextSpan(
         text: "Have an account? ",
         style:
-        const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
+            const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
         children: [
           TextSpan(
             text: 'Sign in',
@@ -135,7 +135,7 @@ class _ForgotPasswordVerifyOtpScreenState
   }
 
   Future<bool> _verifyOTP() async {
-    bool isSuccess = false;
+    bool _isSuccess = false;
     _verifyOTPStatus = true;
     setState(() {});
     final NetworkResponse response = await NetworkCaller.getRequest(
@@ -146,7 +146,7 @@ class _ForgotPasswordVerifyOtpScreenState
         response.status.toLowerCase().contains('success')) {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, 'OTP verified');
-      isSuccess = true;
+      _isSuccess = true;
     } else if (response.isSuccess) {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, 'Invalid OTP code');
@@ -156,6 +156,6 @@ class _ForgotPasswordVerifyOtpScreenState
     }
     _verifyOTPStatus = false;
     setState(() {});
-    return isSuccess;
+    return _isSuccess;
   }
 }

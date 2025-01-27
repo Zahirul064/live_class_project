@@ -87,7 +87,7 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
           itemCount: taskCountByStatusModel?.taskByStatusList?.length ?? 0,
           itemBuilder: (context, index) {
             final TaskCountModel model =
-            taskCountByStatusModel!.taskByStatusList![index];
+                taskCountByStatusModel!.taskByStatusList![index];
             return TaskStatusSummaryCounterWidget(
               title: model.sId ?? '',
               count: model.sum.toString(),
@@ -102,7 +102,7 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
     _getTaskCountByStatusInProgress = true;
     setState(() {});
     final NetworkResponse response =
-    await NetworkCaller.getRequest(url: Urls.taskCountByStatusUrl);
+        await NetworkCaller.getRequest(url: Urls.taskCountByStatusUrl);
     if (response.isSuccess) {
       taskCountByStatusModel =
           TaskCountByStatusModel.fromJson(response.responseData!);

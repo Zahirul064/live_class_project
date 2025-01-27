@@ -114,7 +114,7 @@ class _SignInScreenState extends State<SignInScreen> {
       "password": _passwordTEController.text,
     };
     final NetworkResponse response =
-    await NetworkCaller.postRequest(url: Urls.loginUrl, body: requestBody);
+        await NetworkCaller.postRequest(url: Urls.loginUrl, body: requestBody);
     if (response.isSuccess) {
       String token = response.responseData!['token'];
       UserModel userModel = UserModel.fromJson(response.responseData!['data']);
@@ -136,7 +136,7 @@ class _SignInScreenState extends State<SignInScreen> {
       text: TextSpan(
         text: "Don't have an account? ",
         style:
-        const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
+            const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
         children: [
           TextSpan(
             text: 'Sign up',

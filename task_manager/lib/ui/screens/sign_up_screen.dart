@@ -177,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       text: TextSpan(
         text: "Already have an account? ",
         style:
-        const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
+            const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
         children: [
           TextSpan(
             text: 'Sign in',

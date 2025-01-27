@@ -21,7 +21,7 @@ class AddNewTaskScreen extends StatefulWidget {
 class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
   final TextEditingController _titleTEController = TextEditingController();
   final TextEditingController _descriptionTEController =
-  TextEditingController();
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _addNewTaskInProgress = false;
 
@@ -89,7 +89,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
       ),
     );
   }
-
+  
   Future<void> _createNewTask() async {
     _addNewTaskInProgress = true;
     setState(() {});

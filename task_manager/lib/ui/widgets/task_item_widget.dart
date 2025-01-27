@@ -60,7 +60,7 @@ class TaskItemWidget extends StatelessWidget {
                               context, MainBottomNavScreen.name);
                         }
                       },
-                      icon: const Icon(Icons.delete,color: Colors.red,),
+                      icon: const Icon(Icons.delete),
                     ),
                     IconButton(
                       onPressed: () async {
@@ -87,9 +87,9 @@ class TaskItemWidget extends StatelessWidget {
 
   Color _getStatusColor(String status) {
     if (status == enumTaskStatus.NewTask.name) {
-      return Colors.lightGreen;
+      return Colors.blue;
     } else if (status == enumTaskStatus.Progress.name) {
-      return Colors.deepPurple;
+      return Colors.purple;
     } else if (status == enumTaskStatus.Canceled.name) {
       return Colors.red;
     } else {
@@ -98,6 +98,8 @@ class TaskItemWidget extends StatelessWidget {
   }
 
   Future<void> _deleteTask(String sid) async {
+    // _getTaskCountByStatusInProgress = true;
+    // setState(() {});
     final NetworkResponse response =
         await NetworkCaller.getRequest(url: Urls.deleteTaskUrl(sid));
     if (response.isSuccess) {
@@ -107,9 +109,13 @@ class TaskItemWidget extends StatelessWidget {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, response.errorMessage);
     }
+    // _getTaskCountByStatusInProgress = false;
+    // setState(() {});
   }
 
   Future<void> _updateTask(String status, String sid) async {
+    // _getTaskCountByStatusInProgress = true;
+    // setState(() {});
     final NetworkResponse response = await NetworkCaller.getRequest(
         url: Urls.updateTaskStatusUrl(sid, status));
     if (response.isSuccess) {
@@ -119,5 +125,7 @@ class TaskItemWidget extends StatelessWidget {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, response.errorMessage);
     }
+    // _getTaskCountByStatusInProgress = false;
+    // setState(() {});
   }
 }

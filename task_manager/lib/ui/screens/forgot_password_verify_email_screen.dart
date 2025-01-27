@@ -87,7 +87,7 @@ class _ForgotPasswordVerifyEmailScreenState
       text: TextSpan(
         text: "Have an account? ",
         style:
-        const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
+            const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
         children: [
           TextSpan(
             text: 'Sign in',
@@ -111,7 +111,7 @@ class _ForgotPasswordVerifyEmailScreenState
   }
 
   Future<bool> _verifyEmail() async {
-    bool isSuccess = false;
+    bool _isSuccess = false;
     _verifyEmailStatus = true;
     setState(() {});
     final NetworkResponse response = await NetworkCaller.getRequest(
@@ -121,13 +121,13 @@ class _ForgotPasswordVerifyEmailScreenState
         response.status.toLowerCase().contains('success')) {
       showSnackBarMessage(TaskManagerApp.navigatorKey.currentContext!,
           'OTP is sent to your email, Please check.');
-      isSuccess = true;
+      _isSuccess = true;
     } else {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, response.errorMessage);
     }
     _verifyEmailStatus = false;
     setState(() {});
-    return isSuccess;
+    return _isSuccess;
   }
 }

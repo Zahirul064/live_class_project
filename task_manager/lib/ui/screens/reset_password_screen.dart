@@ -21,9 +21,9 @@ class ResetPasswordScreen extends StatefulWidget {
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _newPasswordTEController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _confirmPasswordTEController =
-  TextEditingController();
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _progressStatus = false;
 
@@ -57,7 +57,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   TextFormField(
                     controller: _confirmPasswordTEController,
                     decoration:
-                    const InputDecoration(hintText: 'Confirm New Password'),
+                        const InputDecoration(hintText: 'Confirm New Password'),
                   ),
                   const SizedBox(height: 24),
                   Visibility(
@@ -70,7 +70,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             Navigator.pushNamedAndRemoveUntil(
                                 TaskManagerApp.navigatorKey.currentContext!,
                                 SignInScreen.name,
-                                    (value) => false);
+                                (value) => false);
                           }
                         } else {
                           showSnackBarMessage(
@@ -108,7 +108,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       text: TextSpan(
         text: "Have an account? ",
         style:
-        const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
+            const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
         children: [
           TextSpan(
             text: 'Sign in',
@@ -127,7 +127,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   Future<bool> _resetPassword() async {
-    bool isSuccess = false;
+    bool _isSuccess = false;
     _progressStatus = true;
     setState(() {});
     Map<String, dynamic> requestBody = {
@@ -141,14 +141,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     setState(() {});
     if (response.isSuccess &&
         response.status.toLowerCase().contains('success')) {
-      isSuccess = true;
+      _isSuccess = true;
       showSnackBarMessage(TaskManagerApp.navigatorKey.currentContext!,
           'Password changed successfully.');
     } else {
       showSnackBarMessage(
           TaskManagerApp.navigatorKey.currentContext!, response.errorMessage);
     }
-    return isSuccess;
+    return _isSuccess;
   }
 
   @override
