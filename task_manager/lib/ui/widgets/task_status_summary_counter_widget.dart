@@ -14,16 +14,18 @@ class TaskStatusSummaryCounterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return Card(
-      elevation: 0,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        child: Column(
-          children: [
-            Text(count, style: textTheme.titleLarge),
-            Text(title, style: textTheme.titleSmall),
-          ],
+    return Expanded(
+      child: Card(
+        elevation: 0,
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          child: Column(
+            children: [
+              Text(count, style: textTheme.titleLarge),
+              Text(title, style: textTheme.titleSmall),
+            ],
+          ),
         ),
       ),
     );

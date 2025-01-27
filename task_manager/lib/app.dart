@@ -11,7 +11,7 @@ import 'package:task_manager/ui/screens/update_profile_screen.dart';
 import 'package:task_manager/ui/utils/app_colors.dart';
 
 class TaskManagerApp extends StatelessWidget {
-  const TaskManagerApp({super.key});
+  const TaskManagerApp({super.key, });
 
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
