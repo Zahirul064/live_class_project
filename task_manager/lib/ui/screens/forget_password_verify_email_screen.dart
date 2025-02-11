@@ -1,31 +1,29 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager/ui/controllers/reset_password_controller.dart';
-import 'package:task_manager/ui/screens/sign_in_screen.dart';
+import 'package:task_manager/ui/controllers/email_verify_controller.dart';
 import '../utills/app_colors.dart';
 import '../widgets/center_circular_progress_indicator.dart';
 import '../widgets/screen_background.dart';
 import '../widgets/snack_bar_message.dart';
+import 'forget_password_verify_otp_screen.dart';
 
+class ForgetPasswordVerifyEmailScreen extends StatefulWidget {
+  const ForgetPasswordVerifyEmailScreen({super.key});
 
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key, this.email, this.otp});
-  static const String name = '/reset-password';
-  final String? email;
-  final String? otp;
+  static const String name = '/forget-password-verify';
 
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<ForgetPasswordVerifyEmailScreen> createState() =>
+      _ForgetPasswordVerifyEmailScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
-  final TextEditingController _newPasswordTEController =
-      TextEditingController();
-  final TextEditingController _confirmPasswordTEController =
-      TextEditingController();
+class _ForgetPasswordVerifyEmailScreenState
+    extends State<ForgetPasswordVerifyEmailScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final ResetPasswordController _resetPasswordController = Get.find<ResetPasswordController>();
+  final EmailVerifyController _emailVerifyController =
+      Get.find<EmailVerifyController>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,45 +39,31 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 60,
+                    height: 100,
                   ),
                   Text(
-                    'Set Password',
+                    'Your Email Address',
                     style: textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   Text(
-                    'Minimum length password 8 character with letter and number combination',
+                    'A 6 digits verification OTP will be sent to your email address',
                     style: textTheme.titleSmall,
                   ),
                   const SizedBox(
                     height: 24,
                   ),
                   TextFormField(
-                    controller: _newPasswordTEController,
+                    controller: _emailTEController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
-                      hintText: 'New Password',
+                      hintText: 'Email',
                     ),
                     validator: (String? value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'enter new password';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  TextFormField(
-                    controller: _confirmPasswordTEController,
-                    decoration: const InputDecoration(
-                      hintText: 'Confirm Password',
-                    ),
-                    validator: (String? value) {
-                      if (value?.isEmpty ?? true) {
-                        return "enter confirm password";
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Enter your valid email address';
                       }
                       return null;
                     },
@@ -87,16 +71,17 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  GetBuilder<ResetPasswordController>(
+                  GetBuilder<EmailVerifyController>(
                     builder: (controller) {
                       return Visibility(
                         visible: controller.inProgress == false,
                         replacement: const CenterCircularProgressIndicator(),
                         child: ElevatedButton(
-                            onPressed: () {
-                              _onTapResetButton();
-                            },
-                            child: const Text('Confirm')),
+                          onPressed: () {
+                            _onTapEmailVerifyButton();
+                          },
+                          child: const Icon(Icons.arrow_circle_right_outlined),
+                        ),
                       );
                     }
                   ),
@@ -115,27 +100,27 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
   }
 
-  void _onTapResetButton() {
+  void _onTapEmailVerifyButton() {
     if (_formKey.currentState!.validate()) {
-      _resetPassword();
+      _emailVerify();
     }
   }
 
-  Future<void> _resetPassword() async {
-    if(_newPasswordTEController.text == _confirmPasswordTEController.text){
-      final isSuccess = await _resetPasswordController.resetPassword(
-          widget.email.toString(), widget.otp.toString(), _newPasswordTEController.text);
+  Future<void> _emailVerify() async {
+    final isSuccess =
+        await _emailVerifyController.emailVerify(_emailTEController.text);
 
-      if (isSuccess) {
-        showSnackBarMessage(context, 'password change successful');
-        Get.offAllNamed(SignInScreen.name);
-      } else {
-        showSnackBarMessage(context, _resetPasswordController.errorMessage!);
-      }
+    if (isSuccess) {
+      showSnackBarMessage(context, 'OTP has been sent to your email');
+      //Get.toNamed(ForgetPasswordVerifyOtpScreen.name,arguments: {_emailTEController.text});
+      Get.to(
+        ForgetPasswordVerifyOtpScreen(
+          email: _emailTEController.text,
+        ),
+      );
     } else {
-      showSnackBarMessage(context, "don't match this password");
+      showSnackBarMessage(context, _emailVerifyController.errorMessage!);
     }
-
   }
 
   Widget _buildSignUp() {
@@ -151,7 +136,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   color: AppColor.themeColor, fontStyle: FontStyle.italic),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  Get.offAllNamed(SignInScreen.name);
+                  Get.back();
                 },
             ),
           ]),
@@ -161,7 +146,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   void dispose() {
     super.dispose();
-    _newPasswordTEController.dispose();
-    _confirmPasswordTEController.dispose();
+    _emailTEController.dispose();
   }
 }

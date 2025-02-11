@@ -5,9 +5,9 @@ class UserModel {
   String? mobile;
   String? photo;
 
-  String get fullName {
+  String get fullName{
     return '$firstName $lastName';
-  }
+}
 
   UserModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
@@ -19,9 +19,9 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'email': email,
       'firstName': firstName,
       'lastName': lastName,
-      'email': email,
       'mobile': mobile,
       'photo': photo,
     };

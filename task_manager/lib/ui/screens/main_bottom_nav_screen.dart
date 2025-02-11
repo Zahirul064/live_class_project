@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/ui/screens/canceled_task_list_screen.dart';
-import 'package:task_manager/ui/screens/completed_task_list_screen.dart';
-import 'package:task_manager/ui/screens/new_task_list_screen.dart';
+import 'package:get/get.dart';
+import 'package:task_manager/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:task_manager/ui/screens/progress_task_list_screen.dart';
-import 'package:task_manager/ui/utils/status_enum.dart';
+import 'cancel_task_list_screen.dart';
+import 'complete_task_list_screen.dart';
+import 'new_task_list_screen.dart';
+
 
 class MainBottomNavScreen extends StatefulWidget {
   const MainBottomNavScreen({super.key});
-
   static const String name = '/home';
 
   @override
@@ -15,33 +16,40 @@ class MainBottomNavScreen extends StatefulWidget {
 }
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
-  int _selectedIndex = 0;
+  final MainBottomNavController _mainBottomNavController = Get.find<MainBottomNavController>();
+
   final List<Widget> _screens = const [
     NewTaskListScreen(),
     ProgressTaskListScreen(),
-    CompletedTaskListScreen(),
-    CanceledTaskListScreen()
+    CompleteTaskListScreen(),
+    CancelTaskListScreen(),
   ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (int index) {
-          _selectedIndex = index;
-          setState(() {});
-        },
-        destinations: [
-          NavigationDestination(
-              icon: const Icon(Icons.new_label_outlined), label: enumTaskStatus.NewTask.name),
-          NavigationDestination(icon: const Icon(Icons.refresh), label: enumTaskStatus.Progress.name),
-          NavigationDestination(icon: const Icon(Icons.done), label:enumTaskStatus.Completed.name),
-          NavigationDestination(
-              icon: Icon(Icons.cancel_outlined), label: enumTaskStatus.Canceled.name),
-        ],
-      ),
+    return  GetBuilder<MainBottomNavController>(
+      builder: (controller) {
+        return Scaffold(
+          body: _screens[_mainBottomNavController.selectedIndex],
+          bottomNavigationBar: NavigationBar(
+
+
+
+
+              selectedIndex: _mainBottomNavController.selectedIndex,
+              onDestinationSelected: (int index) {
+                _mainBottomNavController.setIndex(index);
+                print(_mainBottomNavController.selectedIndex);
+              },
+              destinations: const [
+                NavigationDestination(
+                    icon: Icon(Icons.new_label_outlined), label: 'New'),
+                NavigationDestination(icon: Icon(Icons.refresh), label: 'Progress'),
+                NavigationDestination(icon: Icon(Icons.done), label: 'Completed'),
+                NavigationDestination(
+                    icon: Icon(Icons.cancel_outlined), label: 'Cancelled'),
+              ]),
+        );
+      }
     );
   }
 }
