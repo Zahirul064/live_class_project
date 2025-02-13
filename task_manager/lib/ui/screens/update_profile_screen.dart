@@ -198,7 +198,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       _pickedImage = image;
-      setState(() {});
+     _updateProfileController.update();
     }
   }
 
@@ -220,10 +220,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
     if (isSuccess) {
       _passwordTEController.clear();
+      successSnackBarMessage('Profile Update Successful');
       Get.offAllNamed(MainBottomNavScreen.name);
-      showSnackBarMessage(context, 'Profile Update Successful');
     } else {
-      showSnackBarMessage(context, _updateProfileController.errorMessage!);
+      errorSnackBarMessage(_updateProfileController.errorMessage!);
     }
   }
 

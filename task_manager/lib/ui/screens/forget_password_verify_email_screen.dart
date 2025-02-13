@@ -2,10 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager/ui/controllers/email_verify_controller.dart';
+import 'package:task_manager/ui/widgets/snack_bar_message.dart';
 import '../utills/app_colors.dart';
 import '../widgets/center_circular_progress_indicator.dart';
 import '../widgets/screen_background.dart';
-import '../widgets/snack_bar_message.dart';
 import 'forget_password_verify_otp_screen.dart';
 
 class ForgetPasswordVerifyEmailScreen extends StatefulWidget {
@@ -111,15 +111,14 @@ class _ForgetPasswordVerifyEmailScreenState
         await _emailVerifyController.emailVerify(_emailTEController.text);
 
     if (isSuccess) {
-      showSnackBarMessage(context, 'OTP has been sent to your email');
-      //Get.toNamed(ForgetPasswordVerifyOtpScreen.name,arguments: {_emailTEController.text});
+      successSnackBarMessage('OTP has been sent to your email');
       Get.to(
         ForgetPasswordVerifyOtpScreen(
           email: _emailTEController.text,
         ),
       );
     } else {
-      showSnackBarMessage(context, _emailVerifyController.errorMessage!);
+      errorSnackBarMessage(_emailVerifyController.errorMessage!);
     }
   }
 

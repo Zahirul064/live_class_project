@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager/ui/controllers/add_new_task_list_controller.dart';
+import 'package:task_manager/ui/widgets/snack_bar_message.dart';
 import '../widgets/center_circular_progress_indicator.dart';
 import '../widgets/screen_background.dart';
-import '../widgets/snack_bar_message.dart';
 import '../widgets/tm_app_bar.dart';
 import 'main_bottom_nav_screen.dart';
 
@@ -107,9 +107,9 @@ class _AddNewTaskListScreenState extends State<AddNewTaskListScreen> {
     if (isSuccess) {
       _clearTextField();
       Get.offAllNamed(MainBottomNavScreen.name);
-      showSnackBarMessage(context, 'Task Added Successful');
+      successSnackBarMessage('Task added successful');
     } else {
-      showSnackBarMessage(context, _addNewTaskListController.errorMessage!);
+      errorSnackBarMessage(_addNewTaskListController.errorMessage!);
     }
   }
 

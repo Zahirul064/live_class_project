@@ -76,21 +76,21 @@ class _SignInScreenState extends State<SignInScreen> {
                       return null;
                     },
                   ),
-                  Builder(builder: (context) {
-                    return const SizedBox(
-                      height: 16,
-                    );
-                  }),
-                  GetBuilder<SignInController>(builder: (controller) {
-                    return Visibility(
-                      visible: controller.inProgress == false,
-                      replacement: const CenterCircularProgressIndicator(),
-                      child: ElevatedButton(
-                        onPressed: _onTabSignInButton,
-                        child: const Icon(Icons.arrow_circle_right_outlined),
-                      ),
-                    );
-                  }),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  GetBuilder<SignInController>(
+                    builder: (controller) {
+                      return Visibility(
+                        visible: controller.inProgress == false,
+                        replacement: const CenterCircularProgressIndicator(),
+                        child: ElevatedButton(
+                          onPressed: _onTabSignInButton,
+                          child: const Icon(Icons.arrow_circle_right_outlined),
+                        ),
+                      );
+                    },
+                  ),
                   const SizedBox(
                     height: 48,
                   ),
@@ -129,9 +129,10 @@ class _SignInScreenState extends State<SignInScreen> {
         _emailTEController.text.trim(), _passwordTEController.text);
 
     if (isSuccess) {
+      successSnackBarMessage('Sign in successful');
       Get.offNamed(MainBottomNavScreen.name);
     } else {
-      showSnackBarMessage(context, _signInController.errorMassage!);
+      errorSnackBarMessage(_signInController.errorMassage!);
     }
   }
 
@@ -163,5 +164,3 @@ class _SignInScreenState extends State<SignInScreen> {
     _emailTEController.dispose();
   }
 }
-
-

@@ -98,8 +98,7 @@ class _ForgetPasswordVerifyOtpScreenState
     final isSuccess = await _otpVerifyController.otpVerify(
         widget.email, _otpTEController.text);
     if (isSuccess) {
-      showSnackBarMessage(context, 'OTP verify success');
-      //Get.toNamed(ResetPasswordScreen.name, arguments: {widget.email,_otpTEController.text});
+      successSnackBarMessage('OTP verify success');
       Get.to(
         ResetPasswordScreen(
           email: widget.email,
@@ -107,7 +106,7 @@ class _ForgetPasswordVerifyOtpScreenState
         ),
       );
     } else {
-      showSnackBarMessage(context, _otpVerifyController.errorMessage!);
+      errorSnackBarMessage(_otpVerifyController.errorMessage!);
     }
   }
 

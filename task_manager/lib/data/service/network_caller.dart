@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:get/route_manager.dart';
 import 'package:http/http.dart';
-import 'package:task_manager/app.dart';
-
+import 'package:task_manager/ui/screens/splash_screen.dart';
 import '../../ui/controllers/auth_controller.dart';
-import '../../ui/screens/sign_in_screen.dart';
 
 class NetworkResponse {
   final int statusCode;
@@ -87,7 +86,8 @@ class NetworkCaller {
 
   static Future<void> _logout() async {
     await AuthController.clearUserData();
-    Navigator.pushNamedAndRemoveUntil(TaskManagerApp.navigatorKey.currentContext!,
-        SignInScreen.name, (predicate) => false);
+     //Navigator.pushNamedAndRemoveUntil(TaskManager.navigatorKey.currentContext!,
+    //     SignInScreen.name, (predicate) => false);
+    Get.offAllNamed(SplashScreen.name);
   }
 }

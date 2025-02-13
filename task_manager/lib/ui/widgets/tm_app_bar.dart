@@ -22,7 +22,6 @@ class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
           GestureDetector(
             onTap: () {
               if (!fromUpdateProfile) {
-                //Navigator.pushNamed(context, UpdateProfileScreen.name);
                 Get.toNamed(UpdateProfileScreen.name);
               }
             },
@@ -53,8 +52,6 @@ class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             onPressed: () async {
               await AuthController.clearUserData();
-              // Navigator.pushNamedAndRemoveUntil(
-              //     context, SignInScreen.name, (predicate) => false);
               Get.offAllNamed(SignInScreen.name);
             },
             icon: const Icon(

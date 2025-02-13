@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
+import 'package:task_manager/ui/widgets/snack_bar_message.dart';
 import '../../data/models/user_model.dart';
 import '../../data/service/network_caller.dart';
 import '../../data/utills/urls.dart';
 import 'auth_controller.dart';
 
 class SignInController extends GetxController {
-
   bool _inProgress = false;
 
   bool get inProgress => _inProgress;
@@ -35,7 +35,7 @@ class SignInController extends GetxController {
       _errorMessage = null;
     } else {
       if (response.statusCode == 401) {
-        _errorMessage = 'Username/Password is incorrect';
+        errorSnackBarMessage('Username/Password is incorrect');
       } else {
         _errorMessage = response.errorMessage;
       }

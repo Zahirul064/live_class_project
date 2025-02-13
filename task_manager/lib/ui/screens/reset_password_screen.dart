@@ -8,7 +8,6 @@ import '../widgets/center_circular_progress_indicator.dart';
 import '../widgets/screen_background.dart';
 import '../widgets/snack_bar_message.dart';
 
-
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key, this.email, this.otp});
   static const String name = '/reset-password';
@@ -25,7 +24,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _confirmPasswordTEController =
       TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final ResetPasswordController _resetPasswordController = Get.find<ResetPasswordController>();
+  final ResetPasswordController _resetPasswordController =
+      Get.find<ResetPasswordController>();
 
   @override
   Widget build(BuildContext context) {
@@ -87,19 +87,17 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  GetBuilder<ResetPasswordController>(
-                    builder: (controller) {
-                      return Visibility(
-                        visible: controller.inProgress == false,
-                        replacement: const CenterCircularProgressIndicator(),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              _onTapResetButton();
-                            },
-                            child: const Text('Confirm')),
-                      );
-                    }
-                  ),
+                  GetBuilder<ResetPasswordController>(builder: (controller) {
+                    return Visibility(
+                      visible: controller.inProgress == false,
+                      replacement: const CenterCircularProgressIndicator(),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            _onTapResetButton();
+                          },
+                          child: const Text('Confirm')),
+                    );
+                  }),
                   const SizedBox(
                     height: 48,
                   ),
@@ -122,20 +120,21 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   Future<void> _resetPassword() async {
-    if(_newPasswordTEController.text == _confirmPasswordTEController.text){
+    if (_newPasswordTEController.text == _confirmPasswordTEController.text) {
       final isSuccess = await _resetPasswordController.resetPassword(
-          widget.email.toString(), widget.otp.toString(), _newPasswordTEController.text);
+          widget.email.toString(),
+          widget.otp.toString(),
+          _newPasswordTEController.text);
 
       if (isSuccess) {
-        showSnackBarMessage(context, 'password change successful');
+        successSnackBarMessage('password change successful');
         Get.offAllNamed(SignInScreen.name);
       } else {
-        showSnackBarMessage(context, _resetPasswordController.errorMessage!);
+        errorSnackBarMessage(_resetPasswordController.errorMessage!);
       }
     } else {
-      showSnackBarMessage(context, "don't match this password");
+      errorSnackBarMessage("don't match this password");
     }
-
   }
 
   Widget _buildSignUp() {

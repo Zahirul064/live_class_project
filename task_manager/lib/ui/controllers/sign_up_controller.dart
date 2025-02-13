@@ -29,13 +29,14 @@ class SignUpController extends GetxController {
 
     final NetworkResponse response =
         await NetworkCaller.postRequest(url: Urls.signUpUrl, body: requestBody);
-    _upProgress = false;
-    update();
     if (response.isSuccess) {
-      _errorMessage = "New user registration successful!";
+      isSuccess = true;
+      _errorMessage = null;
     } else {
       _errorMessage = response.errorMessage;
     }
+    _upProgress = false;
+    update();
     return isSuccess;
   }
 }

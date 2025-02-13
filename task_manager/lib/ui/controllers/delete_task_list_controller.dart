@@ -12,10 +12,10 @@ class DeleteTaskListController extends GetxController {
         await NetworkCaller.getRequest(url: Urls.deleteTaskItemUrl(id));
 
     if (response.isSuccess) {
-      _errorMessage = 'Task delete successful';
-    }
-    else {
-      _errorMessage=null;
+      isSuccess = true;
+      _errorMessage = null;
+    } else {
+      _errorMessage = response.errorMessage;
     }
     return isSuccess;
   }

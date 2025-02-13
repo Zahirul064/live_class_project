@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:task_manager/ui/controllers/task_item_widget_controller.dart';
 import '../../data/models/task_list_model.dart';
 
 class TaskItems extends StatelessWidget {
@@ -13,8 +14,7 @@ class TaskItems extends StatelessWidget {
   final TaskListModel taskModel;
 
   final Future<void> Function(String id) onDeleteTask;
-  final Future<void> Function(String id, String status)
-  onUpdateTaskStatus;
+  final Future<void> Function(String id, String status) onUpdateTaskStatus;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -88,7 +88,7 @@ class TaskItems extends StatelessWidget {
                     },
                     icon: const Icon(
                       Icons.edit,
-                      color: Colors.cyan,
+                      color: Colors.greenAccent,
                     ),
                   ),
                   IconButton(
@@ -102,13 +102,13 @@ class TaskItems extends StatelessWidget {
                             actions: [
                               TextButton(
                                 onPressed: () {
-                                  Navigator.pop(context, false);
+                                  Get.back(result: false);
                                 },
                                 child: const Text('No'),
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.pop(context, true);
+                                  Get.back(result: true);
                                 },
                                 child: const Text('Yes'),
                               ),
@@ -137,63 +137,63 @@ class TaskItems extends StatelessWidget {
 
   Future<String?> _showEditStatusDialog(
       BuildContext context, String currentStatus) async {
-    return showDialog(
+    final TaskItemWidgetController taskItemWidgetController =
+        Get.find<TaskItemWidgetController>();
+    taskItemWidgetController.selectedStatus.value = currentStatus;
+    return showDialog<String>(
       context: context,
       builder: (BuildContext context) {
-        String? selectedStatus = currentStatus;
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return AlertDialog(
-              title: const Text('Update Task Status'),
-              content: DropdownButton<String>(
-                value: selectedStatus,
-                isExpanded: true,
-                items: const [
-                  DropdownMenuItem(
-                    value: 'New',
-                    child: Text('New'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Progress',
-                    child: Text('Progress'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Completed',
-                    child: Text('Completed'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Canceled',
-                    child: Text('Canceled'),
-                  ),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    selectedStatus = value;
-                  });
-                },
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, null);
-                  },
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.red),
-                  ),
+        return AlertDialog(
+          title: const Text('Update Task Status'),
+          content: Obx(
+            () => DropdownButton<String>(
+              value: taskItemWidgetController.selectedStatus.value,
+              isExpanded: true,
+              items: const [
+                DropdownMenuItem(
+                  value: 'New',
+                  child: Text('New'),
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, selectedStatus);
-                  },
-                  child: const Text(
-                    'Update',
-                    style: TextStyle(color: Colors.cyan),
-                  ),
+                DropdownMenuItem(
+                  value: 'Progress',
+                  child: Text('Progress'),
+                ),
+                DropdownMenuItem(
+                  value: 'Completed',
+                  child: Text('Completed'),
+                ),
+                DropdownMenuItem(
+                  value: 'Canceled',
+                  child: Text('Canceled'),
                 ),
               ],
-            );
-          },
+              onChanged: (value) {
+                if (value != null) {
+                  taskItemWidgetController.selectedStatus.value = value;
+                }
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back(result: null);
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.back(result: taskItemWidgetController.selectedStatus.value);
+              },
+              child: const Text(
+                'Update',
+                style: TextStyle(color: Colors.cyan),
+              ),
+            ),
+          ],
         );
       },
     );

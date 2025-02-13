@@ -39,7 +39,7 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
       (_) {
         _getTaskCountByStatusController.getTaskCountByStatus();
         _newTaskListController.getTaskList();
-        // _fetchAllData();
+        //_fetchAllData();
       },
     );
   }
@@ -50,13 +50,13 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
       appBar: const TMAppBar(),
       body: ScreenBackground(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildTaskCardStatus(
-                  _getTaskCountByStatusController.taskCountByStatusList),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: GetBuilder<NewTaskListController>(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              children: [
+                _buildTaskCardStatus(
+                    _getTaskCountByStatusController.taskCountByStatusList),
+                GetBuilder<NewTaskListController>(
                   builder: (controller) {
                     return Visibility(
                       visible: controller.inProgress == false,
@@ -65,8 +65,8 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
                     );
                   },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -99,7 +99,8 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
                         count: model.sum.toString(),
                       );
                     }),
-              )),
+              ),
+          ),
         );
       },
     );
@@ -125,16 +126,17 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
       await _getTaskCountByStatus();
       await _getNewTaskList();
     } catch (e) {
-      showSnackBarMessage(context, e.toString());
+      errorSnackBarMessage(e.toString());
     }
   }
 
   Future<void> _deleteTask(String id) async {
     final bool isSuccess = await _deleteTaskListController.deleteTask(id);
     if (isSuccess) {
-      _fetchAllData();
+      await _fetchAllData();
+      successSnackBarMessage('Task delete successful');
     } else {
-      showSnackBarMessage(context, _deleteTaskListController.errorMessage!);
+      errorSnackBarMessage(_deleteTaskListController.errorMessage!);
     }
   }
 
@@ -142,25 +144,25 @@ class _NewTaskListScreenState extends State<NewTaskListScreen> {
     final bool isSuccess =
         await _updateTaskStatusController.updateTaskStatus(id, status);
     if (isSuccess) {
-      _fetchAllData();
+      await _fetchAllData();
+      successSnackBarMessage('Task status updated successful');
     } else {
-      showSnackBarMessage(context, _updateTaskStatusController.errorMessage!);
+      errorSnackBarMessage(_updateTaskStatusController.errorMessage!);
     }
   }
 
   Future<void> _getTaskCountByStatus() async {
     final bool isSuccess =
         await _getTaskCountByStatusController.getTaskCountByStatus();
-    if (isSuccess) {
-      showSnackBarMessage(
-          context, _getTaskCountByStatusController.errorMassage!);
+    if (!isSuccess) {
+      errorSnackBarMessage(_getTaskCountByStatusController.errorMassage!);
     }
   }
 
   Future<void> _getNewTaskList() async {
     final bool isSuccess = await _newTaskListController.getTaskList();
     if (!isSuccess) {
-      showSnackBarMessage(context, _newTaskListController.errorMassage!);
+      errorSnackBarMessage(_newTaskListController.errorMassage!);
     }
   }
 }

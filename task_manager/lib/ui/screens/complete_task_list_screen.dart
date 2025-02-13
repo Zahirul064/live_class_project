@@ -24,7 +24,8 @@ class CompleteTaskListScreen extends StatefulWidget {
 class _CompleteTaskListScreenState extends State<CompleteTaskListScreen> {
   final GetTaskCountByStatusController _getTaskCountByStatusController =
       Get.find<GetTaskCountByStatusController>();
-final CompleteTaskLIstController _completeTaskLIstController = Get.find<CompleteTaskLIstController>();
+  final CompleteTaskLIstController _completeTaskLIstController =
+      Get.find<CompleteTaskLIstController>();
   final DeleteTaskListController _deleteTaskListController =
       Get.find<DeleteTaskListController>();
   final UpdateTaskStatusController _updateTaskStatusController =
@@ -34,10 +35,10 @@ final CompleteTaskLIstController _completeTaskLIstController = Get.find<Complete
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-          (_) {
-            _getTaskCountByStatusController.getTaskCountByStatus();
-            _completeTaskLIstController.getTaskList();
-        // _fetchAllData();
+      (_) {
+        _getTaskCountByStatusController.getTaskCountByStatus();
+        _completeTaskLIstController.getTaskList();
+        //_fetchAllData();
       },
     );
   }
@@ -55,13 +56,12 @@ final CompleteTaskLIstController _completeTaskLIstController = Get.find<Complete
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: GetBuilder<CompleteTaskLIstController>(
-                  builder: (controller) {
-                    return Visibility(
-                        visible: controller.inProgress == false,
-                        replacement: const CenterCircularProgressIndicator(),
-                        child: _buildTaskListView(controller.taskList));
-                  }
-                ),
+                    builder: (controller) {
+                  return Visibility(
+                      visible: controller.inProgress == false,
+                      replacement: const CenterCircularProgressIndicator(),
+                      child: _buildTaskListView(controller.taskList));
+                }),
               ),
             ],
           ),
@@ -104,10 +104,10 @@ final CompleteTaskLIstController _completeTaskLIstController = Get.find<Complete
     return ListView.builder(
         shrinkWrap: true,
         primary: false,
-        itemCount:taskList.length,
+        itemCount: taskList.length,
         itemBuilder: (context, index) {
           return TaskItems(
-            taskModel:  taskList[index],
+            taskModel: taskList[index],
             onDeleteTask: _deleteTask,
             onUpdateTaskStatus: _updateTaskStatus,
           );
@@ -119,16 +119,17 @@ final CompleteTaskLIstController _completeTaskLIstController = Get.find<Complete
       await _getTaskCountByStatus();
       await _getCompleteTaskList();
     } catch (e) {
-      showSnackBarMessage(context, e.toString());
+      errorSnackBarMessage(e.toString());
     }
   }
 
   Future<void> _deleteTask(String id) async {
     final bool isSuccess = await _deleteTaskListController.deleteTask(id);
     if (isSuccess) {
-      _fetchAllData();
+      await _fetchAllData();
+      successSnackBarMessage('Task delete successful');
     } else {
-      showSnackBarMessage(context, _deleteTaskListController.errorMessage!);
+      errorSnackBarMessage(_deleteTaskListController.errorMessage!);
     }
   }
 
@@ -136,25 +137,25 @@ final CompleteTaskLIstController _completeTaskLIstController = Get.find<Complete
     final bool isSuccess =
         await _updateTaskStatusController.updateTaskStatus(id, status);
     if (isSuccess) {
-      _fetchAllData();
+      await _fetchAllData();
+      successSnackBarMessage('Task status updated successful');
     } else {
-      showSnackBarMessage(context, _updateTaskStatusController.errorMessage!);
+      errorSnackBarMessage(_updateTaskStatusController.errorMessage!);
     }
   }
 
   Future<void> _getTaskCountByStatus() async {
     final bool isSuccess =
         await _getTaskCountByStatusController.getTaskCountByStatus();
-    if (isSuccess) {
-      showSnackBarMessage(
-          context, _getTaskCountByStatusController.errorMassage!);
+    if (!isSuccess) {
+      errorSnackBarMessage(_getTaskCountByStatusController.errorMassage!);
     }
   }
 
   Future<void> _getCompleteTaskList() async {
     final bool isSuccess = await _completeTaskLIstController.getTaskList();
     if (!isSuccess) {
-      showSnackBarMessage(context, _completeTaskLIstController.errorMassage!);
+      errorSnackBarMessage(_completeTaskLIstController.errorMassage!);
     }
   }
 }
